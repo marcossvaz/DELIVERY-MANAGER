@@ -6,6 +6,9 @@
     - ver um único cliente [X]
     - editar cliente [X]
 - PAINEL DO ORDER:
-    - fazer pedido []
+    - fazer pedido CREATE[]
+        - deve mostrar o o cliente
+        - deve mostrar o adrres
     - olhar pedido por meio do ID PEDIDO[]
     - alterar pedido []
+    - adicionar forma de pagamento []
