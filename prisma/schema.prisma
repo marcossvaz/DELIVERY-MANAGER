@@ -12,10 +12,85 @@ datasource db {
   provider = "postgresql"
 }
 
-
 model Client {
-  id String @id @default(uuid())
-  name String
+  id      String @id @default(uuid())
+  name    String
   contact String
-  rg String @unique
+  rg      String @unique
+
+  orders Order[]
+}
+
+model Order {
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
+
+  client_id String
+  client    Client @relation(fields: [client_id], references: [id])
+
+  order_items_id String
+  order_items    Order_Items @relation(fields: [order_items_id], references: [id])
+
+  delivery_id String
+  deliverys   Delivery @relation(fields: [delivery_id], references: [id])
+
+  payment_it String
+  payments   Payment @relation(fields: [payment_it], references: [id])
+}
+
+model Order_Items {
+  id         String @id @default(uuid())
+  quantity   Float
+  unit_price Float
+
+  item_id String
+  items   Item    @relation(fields: [item_id], references: [id])
+  orders  Order[]
+}
+
+model Item {
+  id         String @id @default(uuid())
+  sku        String
+  item_name  String
+  item_size  Float
+  item_price Float
+
+  orders_items Order_Items[]
+}
+
+model Delivery {
+  id       String @id @default(uuid())
+  modality String
+  status   Status
+
+  orders  Order[]
+  adrress Adrress[]
+}
+
+model Adrress {
+  id     String @id @default(uuid())
+  city   String
+  street String
+  evenue String
+  cep    String
+  uf     String
+
+  delivery_id String
+  deliverys   Delivery @relation(fields: [delivery_id], references: [id])
+}
+
+enum Status {
+  PENDING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  FAILED
+}
+
+model Payment {
+  id   String @id @default(uuid())
+  type String // EX: cartão de cédito, dinheiro
+
+  total  Float
+  orders Order[]
 }

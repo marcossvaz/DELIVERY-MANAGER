@@ -12,4 +12,21 @@ export class ClientRepository {
             }
         })
     }
+
+    async getAll() {
+        return await prisma.client.findMany();
+    }
+
+    async findByIdClient(id: string) {
+        return await prisma.client.findUnique({
+            where: {id}
+        })
+    }
+
+    async edit(id: string, data: Client) {
+        return await prisma.client.update({
+            where: {id},
+            data: data
+        })
+    }
 }
