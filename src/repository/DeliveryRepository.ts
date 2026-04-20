@@ -6,14 +6,14 @@ export class DeliveryRepository {
         return await prisma.delivery.create({
             data: {
                 modality: data.modality,
-                status: data.status,
                 adrress: {
                     create: {
-                        city: data.city,
-                        street: data.street,
-                        evenue: data.evenue,
-                        cep: data.CEP,
-                        uf: data.UF,
+                        city: data.address.city,
+                        street: data.address.street,
+                        evenue: data.address.evenue,
+                        cep: data.address.cep,
+                        uf: data.address.uf,
+                        id_primary: data.address.is_primary
                     }
                 }
             }

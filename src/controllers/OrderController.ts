@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import {OrderSchema} from "../../src/controllers/schemas/orderSchema.js"
-import { OrderService } from "../services/OrderService.js";
 import { OrderServiceFactory } from "../factories/OrderServiceFactory.js";
 
 

@@ -60,7 +60,7 @@ model Item {
 model Delivery {
   id       String @id @default(uuid())
   modality String
-  status   Status
+  status   Status?
 
   orders  Order[]
   adrress Adrress[]

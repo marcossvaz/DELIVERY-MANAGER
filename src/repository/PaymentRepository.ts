@@ -6,9 +6,6 @@ export class PaymentRepository {
         return await prisma.payment.create({
             data: {
                 type: data.type,
-                orders: {
-                    connect: {id: data.orders}
-                },
                 total: data.total
             }
         })

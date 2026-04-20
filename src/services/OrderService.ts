@@ -17,7 +17,11 @@ export class OrderService {
 
         const _dataPayment = await this.paymentRepository.create(data.payment);
         const _dataDelivery = await this.deliveryRepository.create(data.delivery);
-          const _dataOrder = await this.orderRepository.create({...data, delivery_id: _dataDelivery.id, payment_id: _dataPayment.id });
+          const _dataOrder = await this.orderRepository.create({
+            client_id: data.client_id,
+            delivery_id: _dataDelivery.id,
+            payment_id: _dataPayment.id
+          });
 
         return { _dataOrder, _dataPayment, _dataDelivery };
     }
