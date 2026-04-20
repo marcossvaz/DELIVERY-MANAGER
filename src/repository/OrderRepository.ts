@@ -8,7 +8,6 @@ export class OrderRepository {
                 client_id: data.client_id,
                 delivery_id: data.delivery_id,
                 payment_it: data.payment_id,
-                order_items_id: data.order_items_id
             },
             include: {
                 client: true,

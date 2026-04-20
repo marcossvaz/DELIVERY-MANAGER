@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { ClientController } from "../controllers/ClientController.js";
-import { OrderClient } from "../controllers/OrderController.js";
+import { OrderController } from "../controllers/OrderController.js";
+import { ItemController } from "../controllers/ItemController.js";
 
 const routes = Router();
 
 const clientRoutes = new ClientController();
-const orderRoutes = new OrderClient();
+const orderRoutes = new OrderController();
+const itemRoutes = new ItemController()
 
 // CLIENT ROUTES ---------------------------
 routes.post('/client', clientRoutes.create);
@@ -15,5 +17,10 @@ routes.patch('/client/:id', clientRoutes.edit);
 
 // ORDER ROUTES -----------------------------
 routes.post('/order', orderRoutes.create);
+
+
+// ITEM ROUTES -----------------------------
+routes.post('/item', itemRoutes.create)
+
 
 export { routes };

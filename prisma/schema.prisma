@@ -28,8 +28,7 @@ model Order {
   client_id String
   client    Client @relation(fields: [client_id], references: [id])
 
-  order_items_id String
-  order_items    Order_Items @relation(fields: [order_items_id], references: [id])
+  order_items   Order_Items[]
 
   delivery_id String
   deliverys   Delivery @relation(fields: [delivery_id], references: [id])
@@ -50,7 +49,7 @@ model Order_Items {
 
 model Item {
   id         String @id @default(uuid())
-  sku        String
+  sku        String?
   item_name  String
   item_size  Float
   item_price Float
@@ -74,6 +73,7 @@ model Adrress {
   evenue String
   cep    String
   uf     String
+  id_primary Boolean @default(true)
 
   delivery_id String
   deliverys   Delivery @relation(fields: [delivery_id], references: [id])
