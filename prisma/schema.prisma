@@ -73,7 +73,7 @@ model Adrress {
   evenue String
   cep    String
   uf     String
-  id_primary Boolean @default(true)
+  is_primary Boolean @default(true)
 
   delivery_id String
   deliverys   Delivery @relation(fields: [delivery_id], references: [id])

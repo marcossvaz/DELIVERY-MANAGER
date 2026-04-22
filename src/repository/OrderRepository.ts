@@ -2,6 +2,7 @@ import { prisma } from "../lib/prisma.js";
 import { Order } from "../models/Order.js";
 
 export class OrderRepository {
+
     async create(data: Order) {
         return await prisma.order.create({
             data: {
@@ -11,6 +12,19 @@ export class OrderRepository {
             },
             include: {
                 client: true,
+                deliverys: {
+                    include: {
+                        adrress: true
+                    }
+                }
+            }
+        })
+    }
+
+    async findById(id: string) {
+        return await prisma.order.findUnique({
+            where: {id},
+            include: {
                 deliverys: {
                     include: {
                         adrress: true

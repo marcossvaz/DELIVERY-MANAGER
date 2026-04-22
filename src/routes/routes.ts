@@ -17,10 +17,10 @@ routes.patch('/client/:id', clientRoutes.edit);
 
 // ORDER ROUTES -----------------------------
 routes.post('/order', orderRoutes.create);
-
+routes.get('/order/:id', orderRoutes.findbyId);
 
 // ITEM ROUTES -----------------------------
-routes.post('/item', itemRoutes.create)
+routes.post('/item', itemRoutes.create);
 
 
 export { routes };

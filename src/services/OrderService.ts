@@ -25,4 +25,11 @@ export class OrderService {
 
         return { _dataOrder, _dataPayment, _dataDelivery };
     }
+
+    async findById(id: string) {
+        const _dataId = await this.orderRepository.findById(id);
+
+        return _dataId;
+    }
+    
 }

@@ -26,7 +26,12 @@ export const OrderSchema = z.object({
     })).min(1, "Pedido precisa de ao menos 1 item"),
 });
 
+export const OrderById = z.object({
+    id: z.string().min(2, "o Id do pedido é obrigatório...")
+})
 
+
+export type OrderByIdDTO = z.infer<typeof OrderById>;
 export type OrderDTO = z.infer<typeof OrderSchema>;
 
 
