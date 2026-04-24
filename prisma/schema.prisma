@@ -53,6 +53,7 @@ model Item {
   item_name  String
   item_size  Float
   item_price Float
+  item_quantity Float
 
   orders_items Order_Items[]
 }

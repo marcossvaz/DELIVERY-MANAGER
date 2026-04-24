@@ -5,3 +5,9 @@ export interface Item {
     item_size: number;
     item_price: number;
 }
+
+export interface Sku {
+    name: string,
+    brand: string,
+    type: string
+}

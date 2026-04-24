@@ -8,12 +8,15 @@
 - PAINEL DO ORDER:
     - fazer pedido CREATE[X]
         - deve mostrar um cliente específico (por meio ID)[X]
+        - criar função geradora de sku []
     - olhar pedido por meio do ID PEDIDO[]
     - alterar pedido []
     - adicionar forma de pagamento []
     - adicionar rota de item []
-        - criar função geradora de sku []
         - criar produto [X]
         - ver todos os item []
         - aditar item []
         - ver específico os item []
+        - controle de estoque
+            - não deve tirar quantidade que não existe no estoque []
+            -
