@@ -9,6 +9,9 @@ export class ItemRepository {
                 item_size: data.item_size,
                 item_price: data.item_price,
                 item_quantity: data.item_quantity,
+                weight: data.weight,
+                depth: data.depth,
+                height: data.height,
                 sku: sku || null
             }, include: {
                 orders_items: true
@@ -19,6 +22,6 @@ export class ItemRepository {
     async getById(id: string) {
         return await prisma.item.findFirst({
             where:{id}
-        })
+        });
     }
 }

@@ -40,16 +40,22 @@ model Order {
 model Order_Items {
   id         String @id @default(uuid())
   quantity   Float
-  unit_price Float
+  unit_price Float?
 
   item_id String
   items   Item    @relation(fields: [item_id], references: [id])
-  orders  Order[]
+
+  order_id String
+  orders Order @relation(fields: [order_id], references: [id])
+
 }
 
 model Item {
   id         String @id @default(uuid())
   sku        String?
+  weight Float
+  depth Float
+  height Float
   item_name  String
   item_size  Float
   item_price Float

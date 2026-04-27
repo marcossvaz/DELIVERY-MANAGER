@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { OrderById, OrderSchema } from "../../src/controllers/schemas/orderSchema.js"
+import { OrderById, orderItemSchema, OrderSchema } from "../../src/controllers/schemas/orderSchema.js"
 import { OrderServiceFactory } from "../factories/OrderServiceFactory.js";
 
 
@@ -16,7 +16,6 @@ export class OrderController {
         }
     }
 
-    //TODO continuar emplementar o projeto, agora pegar por ID E criar de gerador de SKU
     findbyId = async (req: Request, res: Response) => {
         try {
             const { id } = OrderById.parse(req.params);
@@ -27,4 +26,6 @@ export class OrderController {
             res.status(400).json({error: err.message});
         }
     }
+
+  
 }

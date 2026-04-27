@@ -22,5 +22,9 @@ routes.get('/order/:id', orderRoutes.findbyId);
 // ITEM ROUTES -----------------------------
 routes.post('/item', itemRoutes.create);
 routes.get('/item/:id', itemRoutes.getbyId);
+routes.post('/addItem', itemRoutes.addItemOrder);
+
+
+
 
 export { routes };

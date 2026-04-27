@@ -15,13 +15,6 @@ export const OrderSchema = z.object({
         })
 
     }),
-
-    skuCreate: z.object({
-        name: z.string().min(4, "nome do produtor obrigatório"),
-        brand: z.string().min(4, "marca obrigatório"),
-        type: z.string().min(4, "o tipo do produtor é recomendado")
-    }),
-
     payment: z.object({
         type: z.string().min(2, "o tipo de pagamento é obrigatório"),
         total: z.number().positive()
@@ -29,10 +22,10 @@ export const OrderSchema = z.object({
     order_items: z.array(z.object({
         item_id: z.string(),
         quantity: z.number().int().positive(),
-        unit_price: z.number().positive(),
 
     })).min(1, "Pedido precisa de ao menos 1 item"),
 });
+
 
 export const OrderById = z.object({
     id: z.string().min(2, "o Id do pedido é obrigatório...")

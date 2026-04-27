@@ -13,7 +13,7 @@ export class DeliveryRepository {
                         evenue: data.address.evenue,
                         cep: data.address.cep,
                         uf: data.address.uf,
-                        id_primary: data.address.is_primary
+                        is_primary: data.address.is_primary
                     }
                 }
             }

@@ -1,5 +1,7 @@
+import { AddItemInOrderDTO } from "../controllers/schemas/itemSchema.js";
 import { OrderDTO } from "../controllers/schemas/orderSchema.js";
 import { DeliveryRepository } from "../repository/DeliveryRepository.js";
+import { ItemRepository } from "../repository/ItemRepository.js";
 import { OrderRepository } from "../repository/OrderRepository.js";
 import { PaymentRepository } from "../repository/PaymentRepository.js";
 
@@ -9,6 +11,7 @@ export class OrderService {
         private readonly orderRepository: OrderRepository,
         private readonly paymentRepository: PaymentRepository,
         private readonly deliveryRepository: DeliveryRepository,
+        private readonly itemRepository: ItemRepository
     ) { }
 
     async create(data: OrderDTO,) {
@@ -21,7 +24,6 @@ export class OrderService {
             payment_id: _dataPayment.id,
         });
 
-        //TODO adicionar o generateSKU
 
         return { _dataOrder, _dataPayment, _dataDelivery };
     }
@@ -32,4 +34,25 @@ export class OrderService {
         return _dataId;
     }
 
+    async addItemInOrder(data: AddItemInOrderDTO, id: string) {
+        const item = await this.itemRepository.getById(data.item_id);
+
+        if (!item) throw new Error("Item não encontrado");
+
+        if (item) {
+            if (!item.item_quantity) {
+                const addItem = item.item_price * data.quantity;
+
+                const order_item = await this.orderRepository.addItemInOrder(data, addItem);
+                return order_item;
+            } else {
+                const newQtdItem = item.item_quantity + Number(data.quantity);
+                await this.orderRepository.updateItem({ quantity: newQtdItem }, id); //TODO testar se está atualizando a quantidade adicionado no order
+            }
+
+        }
+    }
+
+    //TODO implementar o order_item alterar o model schema no prisma para criar ligação com ITEM
+    //TODO criar função de para caluclo de frete ou Usar API de frete
 }
