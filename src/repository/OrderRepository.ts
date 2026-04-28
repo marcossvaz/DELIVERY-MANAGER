@@ -49,15 +49,21 @@ export class OrderRepository {
         })
     }
 
-    async updateItem(data: UpdateItemInOrderDTO,id:string) {
+    async updateItem(data: UpdateItemInOrderDTO, id: string) {
         return await prisma.order_Items.update({
-            where: {
-                id
-            },
+            where:  {id},
             data: {
                 ...data
             }
         })
+    }
+
+    async findOrderItem(order_id: string, item_id : string) {
+        return await prisma.order_Items.findFirst({
+            where: {
+                order_id, item_id
+            }
+        });
     }
 
 }

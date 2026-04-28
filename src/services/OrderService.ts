@@ -34,22 +34,20 @@ export class OrderService {
         return _dataId;
     }
 
-    async addItemInOrder(data: AddItemInOrderDTO, id: string) {
+    async addItemInOrder(data: AddItemInOrderDTO, order_id: string) {
         const item = await this.itemRepository.getById(data.item_id);
 
         if (!item) throw new Error("Item não encontrado");
 
-        if (item) {
-            if (!item.item_quantity) {
-                const addItem = item.item_price * data.quantity;
+        const existingOrderItem = await this.orderRepository.findOrderItem(order_id, data.item_id);
 
-                const order_item = await this.orderRepository.addItemInOrder(data, addItem);
-                return order_item;
-            } else {
-                const newQtdItem = item.item_quantity + Number(data.quantity);
-                await this.orderRepository.updateItem({ quantity: newQtdItem }, id); //TODO testar se está atualizando a quantidade adicionado no order
-            }
-
+        if (!existingOrderItem) {
+            const unit_price = item.item_price * data.quantity;
+            return await this.orderRepository.addItemInOrder(data, unit_price);
+        } else {
+            const updateNewQuantity = existingOrderItem.quantity + Number(data.quantity);
+            await this.orderRepository.updateItem({quantity: updateNewQuantity}, existingOrderItem.id);
+            return this.orderRepository.findOrderItem(order_id, data.item_id);
         }
     }
 

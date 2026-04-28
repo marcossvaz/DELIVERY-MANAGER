@@ -30,15 +30,11 @@ export class ItemController {
     addItemOrder = async (req: Request, res: Response) => {
         try {
             const value = AddItemInOrder.parse(req.body);
-            const { id } = orderById.parse(req.params);
-
-
-            const result = await OrderServiceFactory.addItemInOrder(value, id);
+         
+            const result = await OrderServiceFactory.addItemInOrder(value, value.order_id);
             res.status(201).json(result);
         } catch (err: any) {
-            res.status(401).json({ error: err.message });
+            res.status(400).json({ error: err.message });
         }
-
     }
-
 }
