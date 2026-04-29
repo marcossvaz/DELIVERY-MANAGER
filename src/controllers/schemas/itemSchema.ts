@@ -36,7 +36,12 @@ export const orderById = z.object({
     id: z.string().min(2, "O id é obrigatóio")
 })
 
+export const itemUpdateItemStock = z.object({
+    quantity: z.number().min(2, "quantidade é obrigatoria")
+})
+
 
 export type UpdateItemInOrderDTO = z.infer<typeof UpdateItemInOrder>;
 export type AddItemInOrderDTO = z.infer<typeof AddItemInOrder>;
 export type itemDTO = z.infer<typeof ItemSchema>;
+export type ITemUpdateItemStockDTO = z.infer<typeof itemUpdateItemStock>;

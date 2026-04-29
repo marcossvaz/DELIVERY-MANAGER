@@ -1,4 +1,4 @@
-import { itemDTO } from "../controllers/schemas/itemSchema.js";
+import { itemDTO, ITemUpdateItemStockDTO } from "../controllers/schemas/itemSchema.js";
 import { prisma } from "../lib/prisma.js";
 
 export class ItemRepository {
@@ -23,5 +23,14 @@ export class ItemRepository {
         return await prisma.item.findFirst({
             where:{id}
         });
+    }
+
+    async updateItemSotck(data: ITemUpdateItemStockDTO, id: string) {
+        return await prisma.item.update({
+            where: {id},
+            data: {
+                item_quantity: data.quantity
+            }
+        })
     }
 }

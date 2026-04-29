@@ -14,7 +14,7 @@ export class OrderService {
         private readonly itemRepository: ItemRepository
     ) { }
 
-    async create(data: OrderDTO,) {
+    async create(data: OrderDTO) {
 
         const _dataPayment = await this.paymentRepository.create(data.payment);
         const _dataDelivery = await this.deliveryRepository.create(data.delivery);
@@ -42,15 +42,29 @@ export class OrderService {
         const existingOrderItem = await this.orderRepository.findOrderItem(order_id, data.item_id);
 
         if (!existingOrderItem) {
+
+            if (data.quantity > item.item_quantity) {
+                throw new Error(`Não a essa quantidade em estoque, apenas ${item.item_quantity} un`)
+            }
+
             const unit_price = item.item_price * data.quantity;
+            const updateStockItem = item.item_quantity - data.quantity;
+            this.itemRepository.updateItemSotck({quantity:updateStockItem}, item.id); //TODO alterar o item que estpa no estoque
             return await this.orderRepository.addItemInOrder(data, unit_price);
         } else {
-            const updateNewQuantity = existingOrderItem.quantity + Number(data.quantity);
-            await this.orderRepository.updateItem({quantity: updateNewQuantity}, existingOrderItem.id);
+           
+            if (data.quantity > item.item_quantity) {
+                throw new Error(`Não a essa quantidade em estoque, apenas ${item.item_quantity} un`)
+            } 
+            
+            const updateNewQuantityInOrder = existingOrderItem.quantity + Number(data.quantity);
+
+            const updateStockItem = item.item_quantity - data.quantity;
+            this.itemRepository.updateItemSotck({quantity:updateStockItem}, item.id);
+            await this.orderRepository.updateItem({ quantity: updateNewQuantityInOrder }, existingOrderItem.id);
             return this.orderRepository.findOrderItem(order_id, data.item_id);
         }
     }
 
-    //TODO implementar o order_item alterar o model schema no prisma para criar ligação com ITEM
     //TODO criar função de para caluclo de frete ou Usar API de frete
 }
