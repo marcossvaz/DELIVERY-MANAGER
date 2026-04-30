@@ -19,5 +19,5 @@
         - ver específico os item []
         - controle de estoque
             - não deve tirar quantidade que não existe no estoque [X]
-            - E quanto add no pedido alterar o estoque(ITEM) []
+            - E quanto add no pedido alterar o estoque(ITEM) [X]
             

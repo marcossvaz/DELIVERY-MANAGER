@@ -1,5 +1,6 @@
 import { DeliveryDTO } from "../controllers/schemas/deliverySchema.js";
 import { prisma } from "../lib/prisma.js";
+import { Status } from "../models/Status.js";
 
 export class DeliveryRepository {
     async create(data: DeliveryDTO) {
@@ -17,6 +18,13 @@ export class DeliveryRepository {
                     }
                 }
             }
+        })
+    }
+
+    async updateStatus(id: string, status: Status) {
+        return await prisma.delivery.update({
+            where: {id},
+            data: status
         })
     }
 }

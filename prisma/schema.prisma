@@ -67,7 +67,7 @@ model Item {
 model Delivery {
   id       String @id @default(uuid())
   modality String
-  status   Status?
+  status   Status? @default(PENDING)
 
   orders  Order[]
   adrress Adrress[]
@@ -89,6 +89,7 @@ model Adrress {
 enum Status {
   PENDING
   SHIPPED
+  PICKING
   DELIVERED
   CANCELLED
   FAILED

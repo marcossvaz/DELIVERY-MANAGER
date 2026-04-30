@@ -1,4 +1,4 @@
-import { ClientDTO, findByIdClientDTO } from "../controllers/schemas/clientSchema.js";
+import { ClientDTO } from "../controllers/schemas/clientSchema.js";
 import { ClientRepository } from "../repository/ClientRepository.js";
 
 export class ClientService {

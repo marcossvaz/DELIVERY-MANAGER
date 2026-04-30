@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import { OrderById, orderItemSchema, OrderSchema } from "../../src/controllers/schemas/orderSchema.js"
+import { OrderById, OrderSchema } from "../../src/controllers/schemas/orderSchema.js"
 import { OrderServiceFactory } from "../factories/OrderServiceFactory.js";
-
 
 export class OrderController {
 

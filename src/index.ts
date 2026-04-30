@@ -4,5 +4,4 @@ const app = Express();
 
 app.use(json());
 
-
 export { app };

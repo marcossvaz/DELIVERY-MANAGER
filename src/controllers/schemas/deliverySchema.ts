@@ -10,8 +10,6 @@ export const DeliverySchema = z.object({
         uf: z.string().min(2, "O uf é obrigatório"),
         is_primary: z.boolean().default(true)
     })
-    // Address fields 
-
 })
 
 
