@@ -2,12 +2,15 @@ import { Router } from "express";
 import { ClientController } from "../controllers/ClientController.js";
 import { OrderController } from "../controllers/OrderController.js";
 import { ItemController } from "../controllers/ItemController.js";
+import { DeliveryController } from "../controllers/DeliveryController.js";
 
 const routes = Router();
 
 const clientRoutes = new ClientController();
 const orderRoutes = new OrderController();
-const itemRoutes = new ItemController()
+const itemRoutes = new ItemController();
+const deliveryRoutes = new DeliveryController();
+
 
 // CLIENT ROUTES ---------------------------
 routes.post('/client', clientRoutes.create);
@@ -24,6 +27,8 @@ routes.post('/item', itemRoutes.create);
 routes.get('/item/:id', itemRoutes.getbyId);
 routes.post('/addItem', itemRoutes.addItemOrder);
 
+// DELIVERY -----------------------------
+routes.patch('/delivery/:id/status', deliveryRoutes.updateStatus);
 
 
 

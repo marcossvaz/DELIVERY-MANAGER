@@ -1,3 +1,4 @@
+import { Status as PrismaStatus} from "../../generated/prisma/enums.js";
 import { DeliveryDTO } from "../controllers/schemas/deliverySchema.js";
 import { prisma } from "../lib/prisma.js";
 import { Status } from "../models/Status.js";
@@ -24,7 +25,13 @@ export class DeliveryRepository {
     async updateStatus(id: string, status: Status) {
         return await prisma.delivery.update({
             where: {id},
-            data: status
+            data: {status: status as unknown as PrismaStatus}
+        })
+    }
+
+    async findById(id: string){
+        return await prisma.delivery.findFirst({
+            where: {id}
         })
     }
 }

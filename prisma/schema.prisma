@@ -67,7 +67,7 @@ model Item {
 model Delivery {
   id       String @id @default(uuid())
   modality String
-  status   Status? @default(PENDING)
+  status   Status @default(PENDING)
 
   orders  Order[]
   adrress Adrress[]
