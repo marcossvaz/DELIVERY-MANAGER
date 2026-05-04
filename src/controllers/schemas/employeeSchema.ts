@@ -7,4 +7,8 @@ export const employeeSchema = z.object({
     type: z.string().min(2, 'tipo do status na empresa é obrigatório')
 })
 
+export const employeeFindByRgSchema = z.object({
+    rg: z.string().min(2, 'rg obrigatório')
+})
+
 export type EmploeeSchemaDTO = z.infer<typeof employeeSchema>;
