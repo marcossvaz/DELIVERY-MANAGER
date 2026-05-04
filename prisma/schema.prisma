@@ -102,3 +102,16 @@ model Payment {
   total  Float
   orders Order[]
 }
+
+model Employee {
+  id String @id @default(ulid())
+  name String
+  password String
+  rg String
+  type Employee_Type
+}
+
+enum Employee_Type {
+  MANAGER
+  BOSS
+}

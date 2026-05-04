@@ -4,7 +4,8 @@ import { routes } from "./routes/routes.js";
 import { deliveryWorker } from "./lib/deliveryWorker.js";
 
 dotenv.config();
-const port = process.env.PORT
+
+const port = process.env.PORT;
 
 app.use(routes)
 app.listen(port, () => {
